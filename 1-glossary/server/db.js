@@ -22,9 +22,14 @@ let getAll = () => {
     .exec()
 }
 
+let remove = (targetWord) => {
+  return Glossary.deleteOne({ word: targetWord})
+}
+
 // 3. Export the models
 module.exports.save = save;
 module.exports.getAll = getAll
+module.exports.remove = remove
 
 // 4. Import the models into any modules that need them
 
