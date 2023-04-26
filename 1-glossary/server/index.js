@@ -20,11 +20,19 @@ app.use(express.urlencoded({extended: true}));
 app.post('/glossary', function(req, res) {
   //save word and description to the db
   console.log('Server got a POST request!', req.body)
+  save(req.body)
+    .then((response) => {
+      res.status(201).send('successfully posted' + response)
+    });
 })
 
 app.get('/glossary', function(req, res) {
   //get all words and descriptions
   console.log('Server got a GET request!', req.body)
+  getAll()
+    .then((data) => {
+      res.send(data)
+    })
 })
 
 app.delete('/glossary', function(req, res) {

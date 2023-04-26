@@ -6,14 +6,15 @@ mongoose.connect('mongodb://localhost/glossary');
 // 2. Set up any schema and models needed by the app
 let glossarySchema = mongoose.Schema({
   // Schema goes here
-  word: { type: String, unique: true },
+  word: {type: String, unique: true},
   description: String
 })
 
 let Glossary = mongoose.model('Glossary', glossarySchema);
 
 let save = (newWord) => {
-  return Glossary.create(newWord);
+  console.log('This is what is getting loaded to the DB', newWord)
+  return new Glossary(newWord).save();
 }
 
 let getAll = () => {

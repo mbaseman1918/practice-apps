@@ -16,19 +16,22 @@ const App = () => {
       word: "Felix",
       description: "A Human who is not a Slayer"
     }
-
   ]
   const [glossaryWords, setGlossaryWords] = useState(initialWords)
 
   const search = (term) => {
     //execute search and update state of
-    console.log('This is what you are searching', term)
-    axios.get("/glossary")
+    console.log('This is what you are searching', term);
+    axios.get("/glossary", {word: term})
+      .then((response) => {
+        console.log('This is the GET results from the DB', response)
+        setGlossaryWords(response.data)
+      })
   }
 
   const addWord = (word, description) => {
 
-    console.log('This is what the addWord funciton sees', word, description);
+    console.log('This is what the addWord function sees', word, description);
     axios.post("/glossary", {word: word, description: description})
   }
 
@@ -37,7 +40,7 @@ const App = () => {
       <h1>Warhammer Glossary</h1>
       <AddWord onAdd={addWord}/>
       <Search onSearch={search}/>
-      <GlossaryList glossaryWords = {glossaryWords}/>
+      <GlossaryList glossaryWords = {glossaryWords} delete/>
     </div>
   )
 
