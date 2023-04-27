@@ -13,24 +13,30 @@ let glossarySchema = mongoose.Schema({
 let Glossary = mongoose.model('Glossary', glossarySchema);
 
 let save = (newWord) => {
-  console.log('This is what is getting loaded to the DB', newWord)
   return new Glossary(newWord).save();
 }
 
 let getAll = () => {
   return Glossary.find({})
-    .sort('-word')
+    .sort('word')
     .exec()
 }
 
 let remove = (targetWord) => {
+  console.log('This is the targetWord', targetWord);
   return Glossary.deleteOne({ word: targetWord})
+}
+
+let update = (update) => {
+  console.log('This is the target word', update.word);
+  return Glossary.findOneAndReplace({word: update.word}, update)
 }
 
 // 3. Export the models
 module.exports.save = save;
 module.exports.getAll = getAll
 module.exports.remove = remove
+module.exports.update = update
 
 // 4. Import the models into any modules that need them
 
