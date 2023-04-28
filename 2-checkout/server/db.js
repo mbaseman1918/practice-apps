@@ -9,6 +9,12 @@ const connection = mysql.createConnection({
   database: process.env.DB_NAME,
 });
 
+// const connection = mysql.createConnection({
+//   user: 'root',
+//   password:'',
+//   database:''
+// })
+
 const db = Promise.promisifyAll(connection, { multiArgs: true });
 
 db.connectAsync()
