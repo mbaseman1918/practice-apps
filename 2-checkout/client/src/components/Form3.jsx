@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const Form3 = () => {
+const Form3 = ({checkoutInfo}) => {
 
   const [creditCardTerm, setCreditCard] = useState('');
   const [expiryTerm, setExpiryTerm] = useState('');
@@ -8,19 +8,27 @@ const Form3 = () => {
   const [billingZipTerm, setBillingZipTerm] = useState('');
 
   const handleCreditCardChange = (e) => {
-    setCreditCard(e.target.value)
+    setCreditCard(e.target.value);
+    checkoutInfo.creditCardNumber = creditCardTerm;
+    console.log(checkoutInfo);
   }
 
   const handleExpiryChange = (e) => {
-    setExpiryTerm(e.target.value)
+    setExpiryTerm(e.target.value);
+    checkoutInfo.expirationDate = expiryTerm;
+    console.log(checkoutInfo);
   }
 
   const handleCVVChange = (e) => {
-    setCVVTerm(e.target.value)
+    setCVVTerm(e.target.value);
+    checkoutInfo.CVV = CVVTerm;
+    console.log(checkoutInfo);
   }
 
   const handleBillingZipChange = (e) => {
-    setBillingZipTerm(e.target.value)
+    setBillingZipTerm(e.target.value);
+    checkoutInfo.billingZipCode = billingZipTerm;
+    console.log(checkoutInfo);
   }
 
   return (
